@@ -3,14 +3,14 @@ import path from "path";
 
 function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body);
-    const email = req.body.email;
-    const text = req.body.text;
+    const body = JSON.parse(req.body);
+    const email = body.email;
+    const text = body.text;
 
     const newFeedback = {
       id: new Date().toISOString(),
-      email,
-      text,
+      email: email,
+      text: text,
     };
     const filePath = path.join(process.cwd(), "data", "feedback.json");
     const fileData = fs.readFileSync(filePath);
